@@ -1,6 +1,5 @@
 from database.DB_connect import get_connection
-from model.automobile import Automobile
-from model.noleggio import Noleggio
+
 
 '''
     MODELLO: 
@@ -30,15 +29,23 @@ class Autonoleggio:
     def responsabile(self, responsabile):
         self._responsabile = responsabile
 
-    def get_automobili(self) -> list[Automobile] | None:
+    def get_automobili(self) :
         """
             Funzione che legge tutte le automobili nel database
             :return: una lista con tutte le automobili presenti oppure None
         """
+        automobili=[]
+        cnx=get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM automobile")
+        for row in cursor:
+            automobili.append(row)
+            print (row)
+        return automobili
 
         # TODO
 
-    def cerca_automobili_per_modello(self, modello) -> list[Automobile] | None:
+    #def cerca_automobili_per_modello(self, modello) -> list[Automobile] | None:
         """
             Funzione che recupera una lista con tutte le automobili presenti nel database di una certa marca e modello
             :param modello: il modello dell'automobile

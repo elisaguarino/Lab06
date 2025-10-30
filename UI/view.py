@@ -46,11 +46,12 @@ class View:
             weight=ft.FontWeight.BOLD
         )
 
+
         # TextField per responsabile
         self.input_responsabile = ft.TextField(value=self.controller.get_responsabile(), label="Responsabile")
 
         # ListView per mostrare la lista di auto aggiornata
-        self.lista_auto = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
+        self.lista_auto = ft.ListView( expand=True, spacing=15, padding=10, auto_scroll=True)
 
         # TextField per ricerca auto per modello
         self.input_modello_auto = ft.TextField(label="Modello")
@@ -63,8 +64,8 @@ class View:
         pulsante_conferma_responsabile = ft.ElevatedButton("Conferma", on_click=self.controller.conferma_responsabile)
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
-        # TODO
-
+        pulsante_mostra=ft.ElevatedButton("Mostra", on_click=self.controller.mostra)
+        pulsante_cerca=ft.ElevatedButton("Cerca", on_click=self.controller.cerca)
         # --- LAYOUT ---
         self.page.add(
             self.toggle_cambia_tema,
@@ -82,10 +83,18 @@ class View:
             ft.Divider(),
 
             # Sezione 3
-            # TODO
+            ft.Text("Automobili", size=20),
+            ft.Row(spacing=200,
+                   controls=[pulsante_mostra],
+                   alignment=ft.MainAxisAlignment.CENTER),
+           self.lista_auto,
 
+            ft.Divider(),
             # Sezione 4
-            # TODO
+            ft.Text("Cerca Automobile", size=20),
+            ft.Row(spacing=200,
+                   controls=[self.input_modello_auto,pulsante_cerca]),
+            self.lista_auto_ricerca,
         )
 
     def cambia_tema(self, e):
