@@ -71,9 +71,9 @@ class Controller:
                 else:
                     disponibile = "non disponibile"
                 self._view.lista_auto_ricerca.controls.append(ft.Text(f"{cod}  |  {marca}  |  {modello}  |  {anno}  | {posti}  |  {disponibile}"))
-                risultati.append(auto)
-            if not risultati:
-                self._alert_manager.show_alert(f"Nessun veicolo trovato per il modello '{cercata}'.")
+                risultati.append(cod)
+        if not risultati:
+            self._alert_manager.show_alert(f"Nessun veicolo trovato per il modello '{cercata}'.")
 
         self._view.update()
 
